@@ -60,7 +60,7 @@
     right: 100px;
     top: 18px;
     padding: 4px;
-    border: solid 0.2px #333;
+    border: solid 0.2px rgb(55,55,55,0.5);
     border-radius: 66px;
     cursor: pointer;
     display: flex;
