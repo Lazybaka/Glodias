@@ -4,70 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Glodias - Grow Your Ideas</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="./assets/favicon.png">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="section" id="1">
-        <header>
-            <nav>
-            <div class="logo"><img src="./assets/Group 3835.png" alt="Glodias Logo"></div>
-            <button class="menu-toggle"><img src="./assets/menu-line.svg" alt="Menu"></button>
+    <div class="top-bar-container" id="topBar">
+        <div class="top-bar-branding" id="topBarBranding">Glodias > Homepage</div>
+        <nav class="top-bar-navigation" id="topBarNav">
+            <a href="#" class="top-bar-navigation-link" id="licenseLink">Licence</a>
+            <a href="#" class="top-bar-navigation-link" id="policyLink">Policy</a>
+            <a href="#" class="top-bar-navigation-link" id="termsLink">Terms & Conditions</a>
+            <a href="#" class="top-bar-navigation-link" id="pressLink">Press</a>
+            <a href="#" class="top-bar-navigation-link" id="feedbackLink">Feedback</a>
         </nav>
-        </header>
-        <div class="section-content">
-            <h1>Single agency where you’ll get<br> the complete solution for<br> social media management<br> and websites</h1>
-            <div class="services">
-                <div class="service-item">
-                    <img src="assets/image.png" alt="User Experience">
-                    <p>Need help to enhance your user experience<br>
-                        <a href="#">Get a free consultancy <img src="./assets/sidearr.svg" alt="Arrow"></a>
-                    </p>
-                </div>
-                <div class="service-item">
-                    <img src="assets/vector.png" alt="Services">
-                    <p>See how we can build something far better together<br>
-                        <a href="#">Explore our services <img src="./assets/sidearr.svg" alt="Arrow"></a>
-                    </p>
-                </div>
-            </div>
-            <div class="btn">
-                <button class="chat-btn">Let’s Chat</button>
-                <button class="arrow-btn"><img src="./assets/rightarr.svg" alt="Arrow"></button>
-            </div>
-        </div>
-        </div>
     </div>
-    <div class="section" id="2">
-        <div class="web-development-content">
-            <h1>WEB</h1>
-            <h2>DEVELOPMENT</h2>
-            <div class="btn2">
-                <button class="learn-button">Know More</button>
-                <button class="arrow-btn"><img src="./assets/rightarr.svg" alt="Arrow"></button>
-            </div>
-        </div>
-    </div>
-    <div class="section" id="3">
-        <div class="ad-content">
-            <h1>CREATIVE ADVERTISEMENTS</h1>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-            <div class="btn3">
-                <button class="learn-button">Know More</button>
-                <button class="arrow-btn"><img src="./assets/whitearrow.png" alt="Arrow"></button>
-            </div>
-        </div>
-    </div>
-    <div class="section" id="4">Section 4</div>
-    <div class="section" id="5">Section 5</div>
 
-    <div class="left-dots">
-        <div class="dot" data-section="1"></div>
-        <div class="dot" data-section="2"></div>
-        <div class="dot" data-section="3"></div>
-        <div class="dot" data-section="4"></div>
-    </div>
-    <script src="script.js"></script>
+    <header class="main-header-container" id="mainHeader">
+        <div class="header-branding" id="headerBranding">
+            <div class="glodias-logo-img-placeholder" id="glodiasLogo">
+                <img src="Assets/Logo.png">
+            </div>
+        </div>
+        <nav class="main-navigation" id="mainNav">
+            <a href="#" class="main-navigation-item" id="companyNavLink">
+                <span>Company</span>
+                <i class="ri-arrow-drop-down-line"></i>
+            </a>
+            <a href="#" class="main-navigation-item" id="servicesNavLink">
+                <span>Services</span>
+                <i class="ri-arrow-drop-down-line"></i>
+            </a>
+            <a href="#" class="main-navigation-item" id="ourWorkNavLink">
+                <span>Our Work</span>
+                <i class="ri-arrow-drop-down-line"></i>
+            </a>
+            <a href="#" class="main-navigation-item" id="resourcesNavLink">
+                <span>Resources</span>
+                <i class="ri-arrow-drop-down-line"></i>
+            </a>
+            <a href="#" class="contact-button" id="contactButton">Contact Us</a>
+        </nav>
+        <button class="menu-toggle" aria-label="Toggle navigation menu" id="menuToggle"><i class="ri-menu-line"></i></button>
+    </header>
+
+    <section class="hero-section-container" id="heroSection">
+        <div class="hero-content" id="heroContent">
+            <h1 class="hero-headline" id="heroHeadline">
+                We help to organisations and ideas, spark in your mind through our <span>digital skills</span>
+            </h1>
+            <a href="#" class="hero-button" id="seeOurWorkButton">See Our Work</a>
+        </div>
+        <div class="hero-image-wrapper" id="heroImageWrapper">
+            <div class="hero-image-placeholder" id="heroBuildingImage">
+                <img src="Assets/Group 1.png" alt="Hero Image">
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+
+        menuToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('is-active');
+        });
+    </script>
 </body>
 </html>
