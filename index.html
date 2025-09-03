@@ -3,13 +3,403 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glodias - Grow Your Ideas</title>
+    <title>Glodias - Homepage (Recolored with Icons)</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            /* Display Styles */
+            --font-display-1: 800 80px/100px "Noto Sans", sans-serif;
+            --font-display-2: 500 72px/88px "Noto Sans", sans-serif;
+            --font-display-3: 400 64px/80px "Noto Sans", sans-serif;
+            --font-display-4: 500 80px/72px "Noto Sans", sans-serif;
+            --font-display-5: 500 48px/56px "Noto Sans", sans-serif;
+            --font-display-6: 500 40px/48px "Noto Sans", sans-serif;
+
+            /* Headline */
+            --font-headline-1: 500 40px/48px "Noto Sans", sans-serif;
+            --font-headline-2: 500 32px/40px "Noto Sans", sans-serif;
+            --font-headline-3: 500 28px/32px "Noto Sans", sans-serif;
+            --font-headline-4: 500 24px/28px "Noto Sans", sans-serif;
+            --font-headline-5: 500 20px/24px "Noto Sans", sans-serif;
+            --font-headline-6: 500 16px/20px "Noto Sans", sans-serif;
+
+            /* Titles */
+            --font-title-1: 500 22px/28px "Noto Sans", sans-serif;
+            --font-title-2: 500 16px/24px "Noto Sans", sans-serif; /* letter-spacing: +0.15em */
+            --font-title-3: 500 14px/20px "Noto Sans", sans-serif; /* letter-spacing: +0.1em */
+
+            /* Labels */
+            --font-label-1: 500 14px/20px "Noto Sans", sans-serif; /* letter-spacing: +0.1em */
+            --font-label-2: 500 12px/16px "Noto Sans", sans-serif; /* letter-spacing: +0.5em */
+            --font-label-3: 500 11px/16px "Noto Sans", sans-serif; /* letter-spacing: +0.5em */
+
+            /* Body */
+            --font-body-1: 400 16px/24px "Noto Sans", sans-serif; /* letter-spacing: +0.5em */
+            --font-body-2: 400 14px/20px "Noto Sans", sans-serif; /* letter-spacing: +0.25em */
+            --font-body-3: 400 12px/16px "Noto Sans", sans-serif; /* letter-spacing: +0.4em */
+
+            /* --- NEW COLOR PALETTE --- */
+            /* Primary Palette */
+            --color-primary: #587C90;
+            --color-on-primary: #FFFFFF;
+
+            /* Secondary & Accent */
+            --color-secondary: #365466;
+            --color-highlight-accent: #3A9FBF;
+
+            /* Status Colors */
+            --color-success: #4CAF50;
+            --color-warning: #FFC107;
+            --color-error: #E53935;
+            --color-info: #2196F3;
+
+            /* Functional */
+            --color-link-default: #587C90;
+            --color-link-hover: #3A9FBF;
+            --color-disable: #D1D5DB;
+
+            /* Grey Scale */
+            --grey-100-bg-surface: #F9FAFB;
+            --grey-200-card-bg: #F3F4F6;
+            --grey-300-borders-dividers: #E5E7EB;
+            --grey-400-disabled-state: #D1D5DB;
+            --grey-500-placeholder: #9CA3AF;
+            --grey-600-secondary-text: #6B7280;
+            --grey-700-body-text: #4B5563;
+            --grey-800-strong-text: #374151;
+            --grey-900-primary-text: #111827;
+
+            /* Backgrounds */
+            --bg-base-full: #FFFFFF;
+            --bg-surface-default: #F9FAFB;
+            --bg-surface-hover: #F3F4F6;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Noto Sans", sans-serif;
+            color: var(--grey-800-strong-text);
+            background-color: var(--bg-base-full);
+        }
+
+        /* Top Bar */
+        .top-bar-container {
+            background-color: var(--color-primary);
+            color: var(--color-on-primary);
+            padding: 8px 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-bar-branding {
+            text-decoration: none;
+            color: var(--color-on-primary);
+            font: var(--font-label-2);
+            font-weight: 100;
+            font-size: 12px;
+        }
+
+        .top-bar-navigation {
+            display: flex;
+            gap: 20px;
+        }
+
+        .top-bar-navigation-link {
+            text-decoration: none;
+            color: var(--color-on-primary);
+            font: var(--font-label-2);
+            font-weight: 100;
+            font-size: 12px;
+            text-decoration: underline;
+        }
+
+        /* Main Header */
+        .main-header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 100px;
+            background-color: var(--bg-base-full);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .header-branding {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .glodias-logo-img-placeholder img {
+            width: 139.61px;
+            height: 50.03px;
+            object-fit: contain;
+        }
+
+        .main-navigation {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .main-navigation-item {
+            font: var(--font-headline-6);
+            color: var(--color-secondary);
+            text-decoration: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            font-weight: 400;
+        }
+
+        .main-navigation-item i {
+            font-size: 35px;
+            font-style: none;
+        }
+
+        .contact-button {
+            background-color: var(--color-error);
+            color: var(--color-on-primary);
+            font: var(--font-headline-6);
+            padding: 10px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-button:hover {
+            background-color: var(--color-link-hover);
+        }
+        
+        /* Hero Section */
+        .hero-section-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 100px;
+            gap: 50px;
+            background-color: var(--bg-base-full);
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 55%;
+        }
+
+        .hero-headline {
+            font-family: "Tinos", serif;
+            color: var(--color-secondary);
+            font-style: italic;
+            font-weight: 400;
+            font-size: 50px;
+            margin-bottom: 30px;
+        }
+
+        .hero-headline span {
+            color: var(--color-error);
+        }
+
+        .hero-button {
+            background-color: var(--color-primary);
+            color: var(--color-on-primary);
+            font: var(--font-headline-6);
+            font-weight: 500;
+            padding: 13px;
+            border-radius: 6.75px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+        }
+
+        .hero-button:hover {
+            background-color: var(--color-link-hover);
+        }
+
+        .hero-image-placeholder img {
+            width: 340px;
+            height: 340px;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: var(--color-secondary);
+        }
+        
+        /* Partners Section */
+        .partners-section-container {
+            background-color: #365466;
+            min-height: 250px;
+            height: auto;
+            padding-top: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--color-on-primary);
+        }
+
+        .partners-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 100px;
+            margin-bottom: 30px;
+        }
+
+        .partners-header h2 {
+            font: var(--font-headline-4);
+            font-weight: 400;
+            margin: 0;
+            color: var(--color-on-primary);
+        }
+
+        .partners-header a {
+            font: var(--font-label-1);
+            color: var(--color-on-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .partners-header a:hover {
+            color: var(--color-highlight-accent);
+        }
+
+        .partners-logos {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding-bottom: 40px;
+        }
+        
+        .partners-logos img {
+            height: 100px;
+            width: auto;
+            max-width: 200px;
+            object-fit: contain;
+        }
+
+        /* New Info Bar Section */
+        .info-bar {
+            height: 20px;
+            background-color: var(--color-info);
+            color: var(--color-on-primary);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font: var(--font-label-3);
+            text-transform: uppercase;
+            text-align: center;
+            position: relative;
+        }
+
+        .sentence {
+            position: absolute;
+            width: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .sentence.active {
+            opacity: 1;
+        }
+        
+        /* --- MEDIA QUERIES FOR RESPONSIVENESS --- */
+
+        @media (max-width: 1024px) {
+            .top-bar-container, .main-header-container {
+                padding: 10px 30px;
+            }
+            
+            .hero-section-container {
+                flex-direction: column;
+                padding: 40px 30px;
+                text-align: center;
+                gap: 30px;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+            }
+
+            .hero-headline, .hero-button {
+                margin-left: 0;
+            }
+
+            .top-bar-navigation {
+                display: none;
+            }
+
+            .main-navigation {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                right: 0;
+                left: 0;
+                background-color: var(--bg-base-full);
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+                padding: 20px 0;
+                z-index: 10;
+            }
+
+            .main-navigation.is-active {
+                display: flex;
+            }
+            
+            .main-navigation-item, .contact-button {
+                width: 100%;
+                text-align: center;
+                padding: 10px 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .main-header-container {
+                position: relative;
+            }
+
+            .partners-header {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+                padding: 0 15px;
+            }
+            
+            .partners-logos {
+                padding: 0 15px 40px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .top-bar-container, .main-header-container {
+                padding: 8px 15px;
+            }
+            .hero-headline {
+                font-size: 30px;
+                line-height: 1.2;
+            }
+            .main-header-container {
+                padding: 10px 15px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="top-bar-container" id="topBar">
@@ -26,7 +416,7 @@
     <header class="main-header-container" id="mainHeader">
         <div class="header-branding" id="headerBranding">
             <div class="glodias-logo-img-placeholder" id="glodiasLogo">
-                <img src="Assets/Logo.png">
+                <img src="https://placehold.co/139x50?text=Logo">
             </div>
         </div>
         <nav class="main-navigation" id="mainNav">
@@ -60,10 +450,31 @@
         </div>
         <div class="hero-image-wrapper" id="heroImageWrapper">
             <div class="hero-image-placeholder" id="heroBuildingImage">
-                <img src="Assets/Group 1.png" alt="Hero Image">
+                <img src="https://placehold.co/340x340?text=Hero+Image" alt="Hero Image">
             </div>
         </div>
     </section>
+
+    <section class="partners-section-container">
+        <div class="partners-header">
+            <h2>Our experts worked for these heroes</h2>
+            <a href="#">Read More ></a>
+        </div>
+        <div class="partners-logos">
+            <img src="https://placehold.co/150x75/365466/FFFFFF?text=Client+Logo" alt="Client Logo 1">
+            <img src="https://placehold.co/150x75/365466/FFFFFF?text=Client+Logo" alt="Client Logo 2">
+            <img src="https://placehold.co/150x75/365466/FFFFFF?text=Client+Logo" alt="Client Logo 3">
+            <img src="https://placehold.co/150x75/365466/FFFFFF?text=Client+Logo" alt="Client Logo 4">
+        </div>
+    </section>
+
+    <div class="info-bar">
+        <span class="sentence active" data-index="0">&nbsp;•&nbsp; Innovating for the future, one project at a time &nbsp;•&nbsp;</span>
+        <span class="sentence" data-index="1">&nbsp;•&nbsp; Transforming ideas into digital realities &nbsp;•&nbsp;</span>
+        <span class="sentence" data-index="2">&nbsp;•&nbsp; Your success is our mission &nbsp;•&nbsp;</span>
+        <span class="sentence" data-index="3">&nbsp;•&nbsp; Building bridges between brands and customers &nbsp;•&nbsp;</span>
+        <span class="sentence" data-index="4">&nbsp;•&nbsp; We are Glodias, your digital partner &nbsp;•&nbsp;</span>
+    </div>
 
     <script>
         const menuToggle = document.getElementById('menuToggle');
@@ -72,7 +483,27 @@
         menuToggle.addEventListener('click', () => {
             mainNav.classList.toggle('is-active');
         });
+
+        // Sentence carousel functionality
+        const sentences = document.querySelectorAll('.sentence');
+        let currentSentenceIndex = 0;
+
+        function showNextSentence() {
+            // Remove 'active' class from current sentence
+            sentences[currentSentenceIndex].classList.remove('active');
+
+            // Move to the next sentence, and loop back to the start if needed
+            currentSentenceIndex = (currentSentenceIndex + 1) % sentences.length;
+
+            // Add 'active' class to the new sentence
+            sentences[currentSentenceIndex].classList.add('active');
+        }
+
+        // Initially show the first sentence
+        sentences[currentSentenceIndex].classList.add('active');
+
+        // Change sentences every 5 seconds
+        setInterval(showNextSentence, 9000);
     </script>
 </body>
 </html>
-
