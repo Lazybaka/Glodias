@@ -1,21 +1,34 @@
-    const dots = document.querySelectorAll('.dot');
-    const sections = document.querySelectorAll('.section');
+ const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
 
-    document.querySelector('#myDiv').addEventListener('wheel', () => {
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (window.scrollY >= sectionTop - sectionHeight / 2) {
-                current = section.getAttribute('id');
-                console,log(current);
-            }
+        menuToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('is-active');
         });
 
-        dots.forEach(dot => {
-            dot.classList.remove('active');
-            if (dot.getAttribute('data-section') === current) {
-                dot.classList.add('active');
-            }
-        });
-    });
+        // Sentence carousel functionality
+        const sentences = document.querySelectorAll('.sentence');
+        let currentSentenceIndex = 0;
+
+        function showNextSentence() {
+            sentences[currentSentenceIndex].classList.remove('active');
+            currentSentenceIndex = (currentSentenceIndex + 1) % sentences.length;
+            sentences[currentSentenceIndex].classList.add('active');
+        }
+
+        sentences[currentSentenceIndex].classList.add('active');
+        setInterval(showNextSentence, 5000);
+
+          // Quotes carousel functionality
+        const quotes = document.querySelectorAll('.quotes-section-container .quote-content');
+        let currentQuoteIndex = 0;
+
+        function showNextQuote() {
+            quotes[currentQuoteIndex].classList.remove('active');
+            currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+            quotes[currentQuoteIndex].classList.add('active');
+        }
+
+        if (quotes.length > 0) {
+            quotes[currentQuoteIndex].classList.add('active');
+            setInterval(showNextQuote, 7000);
+        }
