@@ -69,7 +69,7 @@
     <section class="partners-section-container">
         <div class="partners-header">
             <h2>Our experts worked for these heroes</h2>
-            <a href="#">Read More ></a>
+            <a href="#">Read More <i class="ri-arrow-right-up-line"></i></a>
         </div>
         <div class="partners-logos">
             <img src="Assets/image 4.png" alt="Client Logo 1">
@@ -86,35 +86,99 @@
         <span class="sentence" data-index="3">&nbsp;•&nbsp; Building bridges between brands and customers &nbsp;•&nbsp;</span>
         <span class="sentence" data-index="4">&nbsp;•&nbsp; We are Glodias, your digital partner &nbsp;•&nbsp;</span>
     </div>
+    
+    <section class="support-section-container">
+        <div class="support-header">
+            <h2>How we support</h2>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellat iure officiis ipsum atque saepe exercitationem sapiente dolor sint nulla accusamus, quas illo quis impedit deleniti soluta recusandae? Reiciendis, iusto a?</p>
+        </div>
+        <div class="support-cards-container">
+            <div class="support-card">
+                <a href="#"><i class="ri-arrow-right-up-line"></i></a>
+                <div class="icon-placeholder">
+                    <img src="Assets/ic1.png">
+                </div>
+                <h3>Campaign Setup <br>and <br>Advertisement</h3>
+            </div>
+            <div class="support-card">
+                <a href="#"><i class="ri-arrow-right-up-line"></i></a>
+                <div class="icon-placeholder">
+                    <img src="Assets/ic2.png">
+                </div>
+                <h3>Content Creation & Creative Support</h3>
+            </div>
+            <div class="support-card">
+                <a href="#"><i class="ri-arrow-right-up-line"></i></a>
+                <div class="icon-placeholder">
+                    <img src="Assets/ic3.png">
+                </div>
+                <h3>UX Research, Audit & <br>Design</h3>
+            </div>
+            <div class="support-card">
+                <a href="#"><i class="ri-arrow-right-up-line"></i></a>
+                <div class="icon-placeholder">
+                    <img src="Assets/ic4.png">
+                </div>
+                <h3>Web (UI) Design &<br> Development</h3>
+            </div>
+            <div class="support-card">
+                <a href="#"><i class="ri-arrow-right-up-line"></i></a>
+                <div class="icon-placeholder">
+                    <img src="Assets/ic5.png">
+                </div>
+                <h3>Social Media & Digital Brand Presence</h3>
+            </div>
+        </div>
+    </section>
 
-    <script>
-        const menuToggle = document.getElementById('menuToggle');
-        const mainNav = document.getElementById('mainNav');
+    <section class="case-studies-section-container">
+        <div class="case-studies-header">
+            <h2>Agency, Who cares about <span style="color:var(--color-error)"><br>you</span> and <span style="color:var(--color-error)">your ideas</span></h2>
+            <a href="#">Explore Case Studies <i class="ri-arrow-right-up-line"></i></a>
+        </div>
+        <div class="case-studies-cards-container">
+            <div class="case-study-card">
+                <img src="Assets/cs.png"alt="Case study image" class="image-placeholder">
+                <div class="case-study-card-content">
+                    <h3>We supported our defence to achieve top notch UX.</h3>
+                    <a href="#">Read Case Study</a> <i class="ri-arrow-right-up-line"></i>
+                </div>
+            </div>
+            <div class="case-study-card">
+                 <img src="Assets/cs.png"alt="Case study image" class="image-placeholder">
+                <div class="case-study-card-content">
+                    <h3>Recently we covered the EXPO of textiles at Hatt, Delhi</h3>
+                    <a href="#">Read Case Study </a><i class="ri-arrow-right-up-line"></i>
+                </div>
+            </div>
+            <div class="case-study-card">
+                 <img src="Assets/cs.png"alt="Case study image" class="image-placeholder">
+                <div class="case-study-card-content">
+                    <h3>Know how we serve UX audit to maanavadikar samiti</h3>
+                    <a href="#">Read Case Study</a>  <i class="ri-arrow-right-up-line"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+      <section class="quotes-section-container">
+        <div class="quote-content active" data-index="0">
+            <p>“We don’t just build digital solutions, we craft tools of transformation for nations and voices for those who serve humanity”</p>
+            <h4 class="author">Aakash Pradhan</h4>
+            <p class="position">Vice President, Glodias</p>
+        </div>
+        <div class="quote-content" data-index="1">
+            <p>“The digital world is not just about technology; it's about connecting people and ideas to create a better future.”</p>
+            <h4 class="author">Jane Doe</h4>
+            <p class="position">Chief Marketing Officer, Glodias</p>
+        </div>
+        <div class="quote-content" data-index="2">
+            <p>“Our goal is to build digital products that are intuitive, beautiful, and fundamentally change how people interact with the world.”</p>
+            <h4 class="author">John Smith</h4>
+            <p class="position">Lead Designer, Glodias</p>
+        </div>
+    </section>
 
-        menuToggle.addEventListener('click', () => {
-            mainNav.classList.toggle('is-active');
-        });
-
-        // Sentence carousel functionality
-        const sentences = document.querySelectorAll('.sentence');
-        let currentSentenceIndex = 0;
-
-        function showNextSentence() {
-            // Remove 'active' class from current sentence
-            sentences[currentSentenceIndex].classList.remove('active');
-
-            // Move to the next sentence, and loop back to the start if needed
-            currentSentenceIndex = (currentSentenceIndex + 1) % sentences.length;
-
-            // Add 'active' class to the new sentence
-            sentences[currentSentenceIndex].classList.add('active');
-        }
-
-        // Initially show the first sentence
-        sentences[currentSentenceIndex].classList.add('active');
-
-        // Change sentences every 5 seconds
-        setInterval(showNextSentence, 3000);
-    </script>
+    <!--Javascript-->
+<script type="text/javascript" src="script.js"></script>
 </body>
 </html>
