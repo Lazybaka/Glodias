@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Glodias — Social Media & Content Agency</title>
+  <!-- Font & Base -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    /* RESET & DESIGN SYSTEM — minimal black/white editorial with creative flourishes */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background-color: #FFFFFF;
+      color: #111111;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      cursor: none; /* hide default cursor for custom */
+    }
+
+    /* Custom cursor — interactive, minimal */
+    .custom-cursor {
+      position: fixed;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: transparent;
+      border: 1.5px solid #111;
+      pointer-events: none;
+      z-index: 9999;
+      transition: width 0.2s, height 0.2s, background 0.2s, border-color 0.2s, transform 0.1s;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: difference;
+    }
+    .custom-cursor-dot {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background: #111;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10000;
+      transform: translate(-50%, -50%);
+      transition: transform 0.05s;
+      mix-blend-mode: difference;
+    }
+    /* hover states for cursor */
+    .cursor-hover {
+      width: 48px;
+      height: 48px;
+      background: rgba(17,17,17,0.05);
+      border-color: #111;
+    }
+
+    /* typography scale — editorial, precise */
+    h1, h2, h3, h4 {
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      font-size: clamp(3.5rem, 12vw, 5.5rem);
+      line-height: 1.1;
+      font-weight: 700;
+    }
+
+    h2 {
+      font-size: 2.25rem;
+      line-height: 1.2;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-tag {
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #666666;
+      margin-bottom: 1.5rem;
+      font-weight: 400;
+      position: relative;
+      display: inline-block;
+    }
+    /* creative underline for section tag */
+    .section-tag::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 24px;
+      height: 1px;
+      background: #111;
+      transition: width 0.3s ease;
+    }
+    .section-tag:hover::after {
+      width: 100%;
+    }
+
+    p {
+      color: #333333;
+      font-weight: 350;
+    }
+
+    .large-body {
+      font-size: 1.75rem;
+      line-height: 1.4;
+      font-weight: 350;
+      color: #111;
+    }
+
+    /* grid & spacing — base 8px system */
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    section {
+      padding: 120px 0;
+      border-bottom: 1px solid #EEEEEE;
+      position: relative;
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    /* interactive noise texture overlay — subtle creative element */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc1IiBudW1PY3RhdmVzPSIzIiAvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNmKSIgb3BhY2l0eT0iMC4wMTUiIC8+PC9zdmc+');
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.5;
+    }
+
+    /* buttons & interactions */
+    .btn {
+      display: inline-block;
+      background: transparent;
+      border: 1.5px solid #111;
+      color: #111;
+      padding: 16px 36px;
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      cursor: none;
+      position: relative;
+      z-index: 10;
+      backdrop-filter: blur(0);
+    }
+
+    .btn:hover {
+      background: #111;
+      color: #fff;
+      transform: scale(1.02);
+      box-shadow: 0 10px 20px -10px rgba(0,0,0,0.1);
+    }
+
+    /* grid helpers */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    /* cards & dividers — interactive hover */
+    .service-card {
+      border-top: 1px solid #EEEEEE;
+      padding-top: 24px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .service-card:hover {
+      border-top-color: #111;
+      transform: translateY(-4px);
+    }
+
+    .process-item {
+      transition: transform 0.3s ease;
+    }
+    .process-item:hover {
+      transform: translateY(-6px);
+    }
+    .process-number {
+      font-size: 3rem;
+      font-weight: 350;
+      color: #DDDDDD;
+      line-height: 1;
+      margin-bottom: 8px;
+      transition: color 0.3s;
+    }
+    .process-item:hover .process-number {
+      color: #111;
+    }
+
+    /* work / portfolio grid */
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 48px 32px;
+    }
+
+    .work-item {
+      transition: transform 0.4s cubic-bezier(0.2,0.9,0.4,1), box-shadow 0.4s;
+    }
+
+    .work-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 30px -15px rgba(0,0,0,0.05);
+    }
+
+    .insta-embed-wrapper {
+      border-radius: 0;
+      overflow: hidden;
+      background: #FAFAFA;
+      border: 1px solid #EEEEEE;
+      transition: border-color 0.3s;
+    }
+    .work-item:hover .insta-embed-wrapper {
+      border-color: #aaa;
+    }
+
+    .instagram-media {
+      margin: 0 !important;
+      width: 100% !important;
+      min-width: auto !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+    }
+
+    .work-stats {
+      margin-top: 16px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #666;
+      display: flex;
+      gap: 24px;
+    }
+
+    /* process horizontal list */
+    .process-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px 40px;
+      border-top: 1px solid #EEEEEE;
+      padding-top: 32px;
+    }
+
+    .process-item {
+      flex: 1 1 200px;
+    }
+
+    /* testimonials stacked */
+    .testimonials-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .testimonial-card {
+      border-top: 1px solid #EEEEEE;
+      padding-top: 32px;
+      transition: border-color 0.3s, padding-left 0.3s;
+    }
+    .testimonial-card:hover {
+      border-top-color: #111;
+      padding-left: 8px;
+    }
+
+    .testimonial-text {
+      font-size: 1.5rem;
+      font-weight: 350;
+      margin-bottom: 16px;
+    }
+
+    .testimonial-author {
+      font-weight: 500;
+      color: #111;
+    }
+
+    /* scroll animations — initial hidden state */
+    .gsap-fade {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .container {
+        padding: 0 24px;
+      }
+      section {
+        padding: 80px 0;
+      }
+      .grid-2, .grid-3, .grid-4, .work-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .large-body {
+        font-size: 1.5rem;
+      }
+      .custom-cursor, .custom-cursor-dot {
+        display: none;
+      }
+      body {
+        cursor: auto;
+      }
+    }
+
+    hr {
+      border: 0;
+      border-top: 1px solid #EEEEEE;
+      margin: 32px 0;
+    }
+
+    .cta-section {
+      text-align: center;
+      border-bottom: none;
+    }
+
+    .cta-section h2 {
+      margin-bottom: 32px;
+    }
+
+    .logo {
+      font-weight: 600;
+      font-size: 1.5rem;
+      letter-spacing: -0.02em;
+      position: relative;
+    }
+
+    .site-header {
+      padding: 32px 0;
+      border-bottom: 1px solid #EEEEEE;
+      background: #fff;
+      position: relative;
+      z-index: 5;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .site-footer {
+      padding: 48px 0;
+      border-top: 1px solid #EEEEEE;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    /* creative elements: floating parallax shapes */
+    .parallax-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .bg-shape {
+      position: absolute;
+      border: 1px solid rgba(0,0,0,0.03);
+      border-radius: 50%;
+      background: rgba(0,0,0,0.01);
+    }
+
+    /* interactive count-up numbers */
+    .stat-number {
+      font-weight: 500;
+      display: inline-block;
+    }
+
+    /* make sure interactive elements are above noise */
+    .container, .site-header, .site-footer, .btn {
+      position: relative;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom Cursor Elements -->
+  <div class="custom-cursor"></div>
+  <div class="custom-cursor-dot"></div>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo"><a href="www.glodias.com"><img src="/site asset/logo.svg" alt="Glodias logo" style="width:128px;height:128px;"></div></a>
+      <div style="color:#666; font-size:0.9rem;">Digital Growth Agency</div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION with parallax effect -->
+    <section class="hero" style="padding-top:80px; border-bottom:0; overflow:hidden;">
+      <div class="container" style="position:relative; z-index:2;">
+        <div class="gsap-fade" style="max-width:1000px;">
+          <h1 style="margin-bottom:24px;" class="hero-title">Social-first growth,<br>built with precision.</h1>
+          <p style="font-size:1.5rem; font-weight:350; color:#444; max-width:700px; margin-bottom:48px;">
+            We turn content into community — strategy, creative, and management for brands that want to lead.
+          </p>
+          <a href="#" class="btn">Start the conversation</a>
+        </div>
+      </div>
+      <!-- Subtle parallax shape -->
+      <div class="parallax-bg">
+        <div class="bg-shape" style="width:400px; height:400px; top:10%; right:-5%; opacity:0.2;"></div>
+      </div>
+    </section>
+
+    <!-- INTRO / PHILOSOPHY -->
+    <section>
+      <div class="container">
+        <div class="grid-2">
+          <div class="gsap-fade">
+            <div class="section-tag">Our philosophy</div>
+          </div>
+          <div class="gsap-fade">
+            <p class="large-body">
+              We believe that social media is the modern storefront. Every post, reel, and story is an opportunity to connect. Our approach is editorial, minimal, and rooted in performance.
+            </p>
+            <p style="margin-top:32px; color:#555;">
+              No vanity metrics — just intentional growth, creative consistency, and content that resonates.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section>
+      <div class="container">
+        <div class="gsap-fade">
+          <div class="section-tag">Capabilities</div>
+        </div>
+        <div class="grid-3">
+          <div class="service-card gsap-fade">
+            <h3 style="font-size:1.75rem; margin-bottom:24px;">Strategy &<br>Management</h3>
+            <ul style="list-style:none; color:#444; font-weight:350;">
+              <li style="margin-bottom:12px;">Brand Analysis</li>
+              <li style="margin-bottom:12px;">Content Strategy & Pillars</li>
+              <li style="margin-bottom:12px;">Monthly Editorial Calendar</li>
+              <li style="margin-bottom:12px;">Posting (Instagram, LinkedIn, Facebook)</li>
+              <li style="margin-bottom:12px;">Performance Tracking & Optimization</li>
+            </ul>
+          </div>
+          <div class="service-card gsap-fade">
+            <h3 style="font-size:1.75rem; margin-bottom:24px;">Creative<br>Production</h3>
+            <ul style="list-style:none; color:#444; font-weight:350;">
+              <li style="margin-bottom:12px;">Reels — editing & direction</li>
+              <li style="margin-bottom:12px;">Static & Carousel Creatives</li>
+              <li style="margin-bottom:12px;">Ad Creatives (if needed)</li>
+              <li style="margin-bottom:12px;">Visual Identity Alignment</li>
+              <li style="margin-bottom:12px;">UGC & Content Capture</li>
+            </ul>
+          </div>
+          <div class="service-card gsap-fade">
+            <h3 style="font-size:1.75rem; margin-bottom:24px;">Growth<br>Consulting</h3>
+            <ul style="list-style:none; color:#444; font-weight:350;">
+              <li style="margin-bottom:12px;">Audience & Competitor Analysis</li>
+              <li style="margin-bottom:12px;">Hashtag & SEO for Social</li>
+              <li style="margin-bottom:12px;">Monthly Reporting & Insights</li>
+              <li style="margin-bottom:12px;">Influencer Outreach Strategy</li>
+              <li style="margin-bottom:12px;">Community Management Playbook</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS SECTION -->
+    <section>
+      <div class="container">
+        <div class="gsap-fade">
+          <div class="section-tag">How we work</div>
+        </div>
+        <div class="process-list">
+          <div class="process-item gsap-fade">
+            <div class="process-number">01</div>
+            <h4 style="font-size:1.5rem; margin-bottom:8px;">Discovery</h4>
+            <p style="color:#555;">Brand audit, audience mapping, and competitive landscape.</p>
+          </div>
+          <div class="process-item gsap-fade">
+            <div class="process-number">02</div>
+            <h4 style="font-size:1.5rem; margin-bottom:8px;">Strategy</h4>
+            <p style="color:#555;">Content pillars, calendar architecture, and KPI framework.</p>
+          </div>
+          <div class="process-item gsap-fade">
+            <div class="process-number">03</div>
+            <h4 style="font-size:1.5rem; margin-bottom:8px;">Create</h4>
+            <p style="color:#555;">Production of reels, statics, and copy — editorial & on-brand.</p>
+          </div>
+          <div class="process-item gsap-fade">
+            <div class="process-number">04</div>
+            <h4 style="font-size:1.5rem; margin-bottom:8px;">Optimize</h4>
+            <p style="color:#555;">Weekly analysis, A/B testing, and agile iteration.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK / PORTFOLIO with count-up stats -->
+    <section>
+      <div class="container">
+        <div class="gsap-fade">
+          <div class="section-tag">Recent work</div>
+        </div>
+        <div class="work-grid">
+          <!-- Item 1 -->
+          <div class="work-item gsap-fade">
+            <div class="insta-embed-wrapper">
+              <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C5kL2K9sP8N/?utm_source=ig_embed" data-instgrm-version="14" style="background:#FFF; border:0; margin:0; padding:0; width:100%;">
+                <div style="padding:16px;"> 
+                  <a href="https://www.instagram.com/p/C5kL2K9sP8N/?utm_source=ig_embed" style="background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> 
+                    <div style="display:flex; flex-direction:row; align-items:center;"> 
+                      <div style="background-color:#F4F4F4; border-radius:50%; flex-grow:0; height:40px; margin-right:14px; width:40px;"></div> 
+                      <div style="display:flex; flex-direction:column; flex-grow:1; justify-content:center;"> 
+                        <div style="background-color:#F4F4F4; border-radius:4px; flex-grow:0; height:14px; margin-bottom:6px; width:100px;"></div> 
+                        <div style="background-color:#F4F4F4; border-radius:4px; flex-grow:0; height:14px; width:60px;"></div>
+                      </div>
+                    </div>
+                    <div style="padding:19% 0;"></div>
+                    <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"></div>
+                    <div style="padding-top:8px;"> 
+                      <div style="color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">View this post on Instagram</div>
+                    </div>
+                    <div style="padding:12.5% 0;"></div> 
+                  </a>
+                  <p style="color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">
+                    <a href="https://www.instagram.com/p/C5kL2K9sP8N/?utm_source=ig_embed" style="color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">A post shared by Glodias (@glodias.studio)</a>
+                  </p>
+                </div>
+              </blockquote>
+            </div>
+            <div class="work-stats">
+              <span>↗ <span class="stat-number" data-target="124">0</span>K views</span>
+              <span>❤️ <span class="stat-number" data-target="8.2">0</span>K engagements</span>
+              <span>💬 <span class="stat-number" data-target="3.4">0</span>K comments</span>
+            </div>
+          </div>
+          <!-- Item 2 -->
+          <div class="work-item gsap-fade">
+            <div class="insta-embed-wrapper">
+              <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/C6nXYxJNE8L/?utm_source=ig_embed" data-instgrm-version="14" style="background:#FFF; border:0; margin:0; padding:0; width:100%;">
+                <div style="padding:16px;"> 
+                  <a href="https://www.instagram.com/reel/C6nXYxJNE8L/?utm_source=ig_embed" style="background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> 
+                    <div style="display:flex; flex-direction:row; align-items:center;"> 
+                      <div style="background-color:#F4F4F4; border-radius:50%; flex-grow:0; height:40px; margin-right:14px; width:40px;"></div> 
+                      <div style="display:flex; flex-direction:column; flex-grow:1; justify-content:center;"> 
+                        <div style="background-color:#F4F4F4; border-radius:4px; flex-grow:0; height:14px; margin-bottom:6px; width:100px;"></div> 
+                        <div style="background-color:#F4F4F4; border-radius:4px; flex-grow:0; height:14px; width:60px;"></div>
+                      </div>
+                    </div>
+                    <div style="padding:19% 0;"></div>
+                    <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"></div>
+                    <div style="padding-top:8px;"> 
+                      <div style="color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">View this post on Instagram</div>
+                    </div>
+                    <div style="padding:12.5% 0;"></div> 
+                  </a>
+                  <p style="color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">
+                    <a href="https://www.instagram.com/reel/C6nXYxJNE8L/?utm_source=ig_embed" style="color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">A post shared by Glodias (@glodias.studio)</a>
+                  </p>
+                </div>
+              </blockquote>
+            </div>
+            <div class="work-stats">
+              <span>↗ <span class="stat-number" data-target="210">0</span>K plays</span>
+              <span>❤️ <span class="stat-number" data-target="15.7">0</span>K likes</span>
+              <span>💬 <span class="stat-number" data-target="1.2">0</span>K comments</span>
+              <span>🔄 <span class="stat-number" data-target="4.8">0</span>K shares</span>
+            </div>
+          </div>
+          <!-- Item 3 -->
+          <div class="work-item gsap-fade">
+            <div class="insta-embed-wrapper">
+              <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C7tRm2BNe2R/?utm_source=ig_embed" data-instgrm-version="14" style="background:#FFF; border:0; margin:0; padding:0; width:100%;">
+                <div style="padding:16px;"> 
+                  <a href="https://www.instagram.com/p/C7tRm2BNe2R/?utm_source=ig_embed" style="background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> 
+                    <div style="display:flex; flex-direction:row; align-items:center;"> 
+                      <div style="background-color:#F4F4F4; border-radius:50%; flex-grow:0; height:40px; margin-right:14px; width:40px;"></div> 
+                      <div style="display:flex; flex-direction:column; flex-grow:1; justify-content:center;"> 
+                        <div style="background-color:#F4F4F4; border-radius:4px; flex-grow:0; height:14px; margin-bottom:6px; width:100px;"></div> 
+                        <div style="background-color:#F4F4F4; border-radius:4px; flex-grow:0; height:14px; width:60px;"></div>
+                      </div>
+                    </div>
+                    <div style="padding:19% 0;"></div>
+                    <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"></div>
+                    <div style="padding-top:8px;"> 
+                      <div style="color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">View this post on Instagram</div>
+                    </div>
+                    <div style="padding:12.5% 0;"></div> 
+                  </a>
+                  <p style="color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">
+                    <a href="https://www.instagram.com/p/C7tRm2BNe2R/?utm_source=ig_embed" style="color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">A post shared by Glodias (@glodias.studio)</a>
+                  </p>
+                </div>
+              </blockquote>
+            </div>
+            <div class="work-stats">
+              <span>↗ <span class="stat-number" data-target="89">0</span>K reach</span>
+              <span>❤️ <span class="stat-number" data-target="6.1">0</span>K engagements</span>
+              <span>💬 <span class="stat-number" data-target="0.98">0</span>K comments</span>
+            </div>
+          </div>
+          <!-- Item 4 -->
+          <div class="work-item gsap-fade">
+            <div class="insta-embed-wrapper">
+              <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/C8mPQ1OtFGr/?utm_source=ig_embed" data-instgrm-version="14" style="background:#FFF; border:0; margin:0; padding:0; width:100%;">
+                <div style="padding:16px;"> 
+                  <a href="https://www.instagram.com/reel/C8mPQ1OtFGr/?utm_source=ig_embed" style="background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> 
+                    <div style="display:flex; flex-direction:row; align-items:center;"> 
+                      <div style="background-color:#F4F4F4; border-radius:50%; flex-grow:0; height:40px; margin-right:14px; width:40px;"></div> 
+                      <div style="display:flex; flex-direction:column; flex-grow:1; justify-content:center;"> 
+                        <div style="background-color:#F4F4F4; border-radius:4px; flex-grow:0; height:14px; margin-bottom:6px; width:100px;"></div> 
+                        <div style="background-color:#F4F4F4; border-radius:4px; flex-grow:0; height:14px; width:60px;"></div>
+                      </div>
+                    </div>
+                    <div style="padding:19% 0;"></div>
+                    <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"></div>
+                    <div style="padding-top:8px;"> 
+                      <div style="color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">View this post on Instagram</div>
+                    </div>
+                    <div style="padding:12.5% 0;"></div> 
+                  </a>
+                  <p style="color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">
+                    <a href="https://www.instagram.com/reel/C8mPQ1OtFGr/?utm_source=ig_embed" style="color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">A post shared by Glodias (@glodias.studio)</a>
+                  </p>
+                </div>
+              </blockquote>
+            </div>
+            <div class="work-stats">
+              <span>↗ <span class="stat-number" data-target="340">0</span>K plays</span>
+              <span>❤️ <span class="stat-number" data-target="22">0</span>K likes</span>
+              <span>💬 <span class="stat-number" data-target="2.3">0</span>K comments</span>
+              <span>🔄 <span class="stat-number" data-target="8.1">0</span>K shares</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section>
+      <div class="container">
+        <div class="gsap-fade">
+          <div class="section-tag">Client results</div>
+        </div>
+        <div class="testimonials-stack">
+          <div class="testimonial-card gsap-fade">
+            <div class="testimonial-text">“They transformed our Instagram from a ghost town into a community hub. Engagement up 340% in three months.”</div>
+            <div class="testimonial-author">Mira Chen, Founder of Align Wellness</div>
+          </div>
+          <div class="testimonial-card gsap-fade">
+            <div class="testimonial-text">“The content strategy is flawless. Every post feels intentional. Our LinkedIn inbound leads doubled since we partnered.”</div>
+            <div class="testimonial-author">David Okonkwo, CMO at FinScale</div>
+          </div>
+          <div class="testimonial-card gsap-fade">
+            <div class="testimonial-text">“Creative direction and reel editing are next level. We've hit 1M+ organic reach on two campaigns this quarter.”</div>
+            <div class="testimonial-author">Sophie Laurent, Brand Director, Maison & Co</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="gsap-fade">
+          <h2 style="font-size:3rem; max-width:800px; margin-left:auto; margin-right:auto;">Let's build your social legacy.</h2>
+          <p style="font-size:1.25rem; color:#555; margin-bottom:40px;">Strategy, creative, management — one seamless partnership.</p>
+          <a href="#" class="btn">Start a project</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container" style="display:flex; justify-content:space-between; align-items:center;">
+      <span>© 2026 Glodias Marketing Technology Pvt Ltd</span>
+      <span style="letter-spacing:0.5px;">IG   •   LI   •   FB</span>
+    </div>
+  </footer>
+
+  <!-- Instagram embed script -->
+  <script async src="//www.instagram.com/embed.js"></script>
+
+  <script>
+    (function(){
+      "use strict";
+
+      // Custom cursor
+      const cursor = document.querySelector('.custom-cursor');
+      const cursorDot = document.querySelector('.custom-cursor-dot');
+      
+      if (cursor && cursorDot) {
+        document.addEventListener('mousemove', (e) => {
+          gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.15, ease: "power2.out" });
+          gsap.to(cursorDot, { x: e.clientX, y: e.clientY, duration: 0.05 });
+        });
+
+        // Hover effects for interactive elements
+        const hoverElements = document.querySelectorAll('a, .btn, .service-card, .process-item, .work-item, .testimonial-card, .logo');
+        hoverElements.forEach(el => {
+          el.addEventListener('mouseenter', () => {
+            cursor.classList.add('cursor-hover');
+          });
+          el.addEventListener('mouseleave', () => {
+            cursor.classList.remove('cursor-hover');
+          });
+        });
+      }
+
+      // GSAP Scroll Animations
+      gsap.registerPlugin(ScrollTrigger);
+      
+      const fadeElements = document.querySelectorAll('.gsap-fade');
+      fadeElements.forEach(el => {
+        gsap.fromTo(el, 
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.9,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 85%",
+              end: "bottom 20%",
+              toggleActions: "play none none none",
+              once: true,
+            }
+          }
+        );
+      });
+
+      // Hero parallax
+      gsap.to('.hero-title', {
+        y: -30,
+        ease: "power1.out",
+        scrollTrigger: {
+          trigger: '.hero',
+          start: "top top",
+          end: "bottom top",
+          scrub: 0.5,
+        }
+      });
+
+      // Count-up stats on view
+      const statNumbers = document.querySelectorAll('.stat-number');
+      const observerOptions = { threshold: 0.3 };
+      
+      const countUp = (el) => {
+        const target = parseFloat(el.dataset.target);
+        if (isNaN(target)) return;
+        let current = 0;
+        const increment = target / 40;
+        const update = () => {
+          current += increment;
+          if (current < target) {
+            el.textContent = current.toFixed(1);
+            requestAnimationFrame(update);
+          } else {
+            el.textContent = target;
+          }
+        };
+        requestAnimationFrame(update);
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const stat = entry.target;
+            if (!stat.classList.contains('counted')) {
+              countUp(stat);
+              stat.classList.add('counted');
+            }
+          }
+        });
+      }, observerOptions);
+
+      statNumbers.forEach(stat => observer.observe(stat));
+
+      // Parallax background shape
+      gsap.to('.bg-shape', {
+        y: 100,
+        ease: "none",
+        scrollTrigger: {
+          trigger: '.hero',
+          start: "top top",
+          end: "bottom top",
+          scrub: 0.3,
+        }
+      });
+
+      // Ensure Instagram embeds
+      if (window.instgrm) {
+        window.instgrm.Embeds.process();
+      }
+      window.addEventListener('load', function() {
+        if (window.instgrm) {
+          window.instgrm.Embeds.process();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
